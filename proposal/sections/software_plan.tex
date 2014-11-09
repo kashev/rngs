@@ -1,5 +1,1 @@
-Plan for software:
-
-\begin{itemize}
-    \item C++ 11
-\end{itemize}
+We plan to use C++11 to create our PRNGs. C++11 introduces a \texttt{std::uniform\_real\_distribution} \cite{uniformrealdistribution} which can be used to convert PRNG outputs into usable forms, as well as providing reference implementations for common PRNGs like the \texttt{std::mersenne\_twister\_engine}, based on the Mersenne twister algorithm \cite{Matsumoto:1998:MTE:272991.272995}. We can both reproduce these algorithms in the C++11 STL, as well as algorithms not implemented in the STL. Our implementations can be designed as functors, then passed to \texttt{std::uniform\_real\_distribution} to create a uniform random variable. Alternatively, the generated bitstream, the random integers which are created by the generator, can be analyzed as well.
