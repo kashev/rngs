@@ -31,3 +31,28 @@
 ## Jetbrains IDE Project Gitignores
 **/.idea/workspace.xml
 **/.idea/tasks.xml
+
+## LaTeX Gitignore
+*.aux
+*.glo
+*.idx
+*.log
+*.toc
+*.ist
+*.acn
+*.acr
+*.alg
+*.bbl
+*.blg
+*.dvi
+*.glg
+*.gls
+*.ilg
+*.ind
+*.lof
+*.lot
+*.maf
+*.mtc
+*.mtc1
+*.out
+*.synctex.gz
