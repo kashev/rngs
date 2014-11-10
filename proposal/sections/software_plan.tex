@@ -1,1 +1,12 @@
-We plan to use C++11 to create our PRNGs. C++11 introduces a \texttt{std::uniform\_real\_distribution} \cite{uniformrealdistribution} which can be used to convert PRNG outputs into usable forms, as well as providing reference implementations for common PRNGs like the \texttt{std::mersenne\_twister\_engine}, based on the Mersenne twister algorithm \cite{Matsumoto:1998:MTE:272991.272995}. We can both reproduce these algorithms in the C++11 STL, as well as algorithms not implemented in the STL. Our implementations can be designed as functors, then passed to \texttt{std::uniform\_real\_distribution} to create a uniform random variable. Alternatively, the generated bitstream, the random integers which are created by the generator, can be analyzed as well.
+We plan to use C++11 to create our PRNGs. C++11 introduces a \texttt{std::uniform\_real\_distribution} \cite{uniformrealdistribution} which can be used to convert PRNG outputs into usable forms, as well as providing reference implementations for common PRNGs like the \texttt{std::mersenne\_twister\_engine}, based on the Mersenne twister algorithm \cite{Matsumoto:1998:MTE:272991.272995}. We can both reproduce these algorithms in the C++11 STL, as well as algorithms not implemented in the STL. Our implementations can be designed as functors, then passed to \texttt{std::uniform\_real\_distribution} to create a uniform random variable. Alternatively, the generated bitstream, the random integers which are created by the generator, can be analyzed as well. These structures will be created within the GNU Scientific Library's class for random number generators, for portability.
+
+Some of the generators we intend to implement are the following:
+\begin{itemize}
+    \item Lehmer RNG \cite{Payne:1969:CLP:362848.362860}
+    \item Mersenne Twister \cite{Matsumoto:1998:MTE:272991.272995}
+    \item WELL - Well Equidistributed Long-period Linear \cite{Panneton:2006:ILG:1132973.1132974}
+    \item Xorshift \cite{Panneton:2005:XRN:1113316.1113319}
+    \item ACORN \cite{Wikramaratna:2008:ACR:1363375.1363601}
+\end{itemize}
+
+These PRNGs vary in their complexity and suitability for complex applications. Some do not pass modern tests, but proving that they do not pass modern statistical analysis is still a worthwile exercise.
