@@ -9,8 +9,9 @@
 
 namespace rng
 {
-    StlRng::StlRng() {
-    }
+    StlRng::StlRng() :
+        RandomNumberGenerator()
+    {}
 
     void StlRng::seed(int seed_num) {
         gen = std::mt19937(seed_num);
@@ -19,4 +20,6 @@ namespace rng
     double StlRng::operator()() {
         return dist(gen);
     }
+
+
 }
