@@ -13,12 +13,12 @@ namespace rng
         RandomNumberGenerator()
     {}
 
-    void StlRng::seed(int seed_num) {
+    void StlRng::seed(fuint seed_num) {
         gen = std::mt19937(seed_num);
     }
 
-    double StlRng::operator()() {
-        return dist(gen);
+    fuint StlRng::operator()() {
+        return gen();
     }
 
 

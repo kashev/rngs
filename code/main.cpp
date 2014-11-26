@@ -17,9 +17,11 @@ int main() {
     StlRng randgen;
     randgen.seed(42);
 
-    for(int i = 0; i < 10; ++i)
+    fuint x = 0;
+    while(true)
     {
-        cout << randgen() << endl;
+        x = randgen();
+        std::cout.write(reinterpret_cast<const char*>(&x), sizeof x);
     }
 
     return 0;

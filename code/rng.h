@@ -8,17 +8,20 @@
 #ifndef RNG_H
 #define RNG_H
 
-#include <random>
+#include <cstdint> // for uint_fast32_t
+
+/*
+ * Convenience typedef for Fast 32 Unsigned Integer Type.
+ */
+typedef uint_fast32_t fuint;
 
 namespace rng
 {
     class RandomNumberGenerator {
     public:
-        RandomNumberGenerator();
-        virtual void seed(int seed_num) = 0;
-        virtual double operator()() = 0;
-    protected:
-        std::uniform_real_distribution<double> dist;
+        RandomNumberGenerator(){};
+        virtual void seed(fuint seed_num) = 0;
+        virtual fuint operator()() = 0;
     };
 }
 

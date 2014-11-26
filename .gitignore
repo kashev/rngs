@@ -1,3 +1,6 @@
+## Project Specific gitignore
+code/bin
+
 ## Standard c++ gitignore
 # Compiled Object files
 *.slo
@@ -28,7 +31,7 @@
 *.out
 *.app
 
-## Jetbrains IDE Project Gitignores
+## Jetbrains IDE Project gitignore
 **/.idea/workspace.xml
 **/.idea/tasks.xml
 

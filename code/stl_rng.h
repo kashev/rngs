@@ -10,13 +10,15 @@
 
 #include "rng.h"
 
+#include <random>
+
 namespace rng
 {
     class StlRng : public RandomNumberGenerator {
     public:
         StlRng();
-        void seed(int seed_num);
-        double operator()();
+        void seed(fuint seed_num);
+        fuint operator()();
     private:
         std::mt19937 gen;
     };
