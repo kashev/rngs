@@ -6,21 +6,42 @@
  */
 
 #include <iostream>
+#include <string>
 
 #include "stl_rng.h"
 
 using namespace std;
 using namespace rng;
 
-int main() {
+int main(int argc, char *argv[]) {
 
-    StlRng randgen;
-    randgen.seed(42);
+    RandomNumberGenerator* randgen_ptr = NULL;
+
+    cerr << argv[1] << endl;
+
+    switch(stoi(argv[1]))
+    {
+        case 0: { // STL RNG using std::mt19937. For testing only.
+            StlRng randgen = StlRng();
+            randgen_ptr = &randgen;
+            break;
+        }
+        /*
+         * Add more RNGs here!
+         */
+        default: {
+            StlRng randgen = StlRng();
+            randgen_ptr = &randgen;
+            break;
+        }
+    }
+
+    randgen_ptr->seed(42);
 
     uint32_t x = 0;
     while(true)
     {
-        x = static_cast<uint32_t>(randgen());
+        x = static_cast<uint32_t>((*randgen_ptr)());
         std::cout.write(reinterpret_cast<const char*>(&x), sizeof x);
     }
 
