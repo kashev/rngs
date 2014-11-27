@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include "stl_rng.h"
+#include "mt19937.h"
 
 using namespace std;
 using namespace rng;
@@ -25,6 +26,11 @@ int main(int argc, char *argv[]) {
     {
         case 0: { // STL RNG using std::mt19937. For testing only.
             StlRng randgen = StlRng();
+            randgen_ptr = &randgen;
+            break;
+        }
+        case 1: {
+            MT19937 randgen = MT19937();
             randgen_ptr = &randgen;
             break;
         }

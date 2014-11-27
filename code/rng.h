@@ -8,14 +8,11 @@
 #ifndef RNG_H
 #define RNG_H
 
-#include <cstdint> // for uint_fast32_t
-
+#include <cstdint> // for fixed width integer types.
 /*
- * Convenience typedef for Fast 32 Unsigned Integer Type. Fast Uints are used internally, even though they must be
- * converted to a type that ensures exactly 32 bits to be passed to dieharder. On 32 bit systems, this conversion
- * won't be anything, but on 64 bit systems, fast 32 bit integers are usually 64 bits.
+ * Convenience typedef for the integer type being used.
  */
-typedef uint_fast32_t fuint;
+typedef uint32_t fuint;
 
 namespace rng
 {
