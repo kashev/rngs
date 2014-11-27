@@ -17,10 +17,10 @@ int main() {
     StlRng randgen;
     randgen.seed(42);
 
-    fuint x = 0;
+    uint32_t x = 0;
     while(true)
     {
-        x = randgen();
+        x = static_cast<uint32_t>(randgen());
         std::cout.write(reinterpret_cast<const char*>(&x), sizeof x);
     }
 
