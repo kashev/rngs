@@ -6,7 +6,6 @@
  */
 
 #include <iostream>
-#include <string>
 
 #include "stl_rng.h"
 
@@ -15,9 +14,12 @@ using namespace rng;
 
 int main(int argc, char *argv[]) {
 
-    RandomNumberGenerator* randgen_ptr = NULL;
+    if (argc != 2)
+    {
+        return 1;
+    }
 
-    cerr << argv[1] << endl;
+    RandomNumberGenerator* randgen_ptr = NULL;
 
     switch(stoi(argv[1]))
     {
