@@ -14,15 +14,16 @@ using namespace std;
 using namespace rng;
 
 int main(int argc, char *argv[]) {
+    int rng = 0;
 
-    if (argc != 2)
+    if (argc >= 2)
     {
-        return 1;
+        rng = stoi(argv[1]);
     }
 
     RandomNumberGenerator* randgen_ptr = NULL;
 
-    switch(stoi(argv[1]))
+    switch(rng)
     {
         case 0: { // STL RNG using std::mt19937. For testing only.
             StlRng randgen = StlRng();
