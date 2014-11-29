@@ -22,10 +22,11 @@ namespace  rng
     void MT19937::seed(fuint seed_num) {
         state_array[0] = seed_num;
 
-        for(size_t i = 1; i < state_size; ++i)
+        for(size_t i = 1; i < n; ++i)
         {
-            state_array[i] =
-                static_cast<fuint>(1812433253 * (state_array[i-1] ^ ((static_cast<uint64_t>(state_array[i-1])) >> 30)) + i);
+            state_array[i] = static_cast<fuint>(
+                f * (state_array[i - 1] ^ ((static_cast<uint64_t>(
+                state_array[i - 1])) >> 30)) + i);
         }
     }
 
@@ -37,26 +38,26 @@ namespace  rng
 
         fuint y = state_array[index];
 
-        y = y ^ (y >> 11);
-        y = y ^ ((y << 7) & 2636928640);
-        y = y ^ ((y << 15) & 4022730752);
-        y = y ^ (y >> 18);
+        y = y ^ (y >> u);
+        y = y ^ ((y << s) & b);
+        y = y ^ ((y << t) & c);
+        y = y ^ (y >> l);
 
-        index = (index + 1) % state_size;
+        index = (index + 1) % n;
 
         return y;
     }
 
     void MT19937::generate_numbers(){
-        for (size_t i = 0; i < state_size; ++i)
+        for (size_t i = 0; i < n; ++i)
         {
-            fuint y = (state_array[i] & 0x80000000)
-                      + (state_array[(i + 1) % state_size] & 0x7fffffff);
-            state_array[i] = state_array[(i + 397) % state_size] ^ (y >> 1);
+            fuint y = (state_array[i] & rmask)
+                      + (state_array[(i + 1) % n] & rprime);
+            state_array[i] = state_array[(i + m) % n] ^ (y >> 1);
 
             if (y % 2 != 0)
             {
-                state_array[i] = state_array[i] ^ 2567483615;
+                state_array[i] = state_array[i] ^ a;
             }
         }
     }
