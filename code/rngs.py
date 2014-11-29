@@ -23,9 +23,16 @@ class Generator(enum.Enum):
 
 
 def check_generator_type(value):
-    for gen in Generator:
-        if (gen.name == value) or (gen.value == int(value)):
-            return gen
+    try:
+        ival = int(value)
+        for gen in Generator:
+            if gen.value == ival:
+                return gen
+    except ValueError:
+        for gen in Generator:
+            if gen.name == value:
+                return gen
+
     raise argparse.ArgumentTypeError(
         "{} is an invalid generator type.".format(value))
 
