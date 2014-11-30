@@ -63,10 +63,12 @@ int main(int argc, char *argv[]) {
     randgen_ptr->seed(42);
 
     /*
-     * Clean Up the RNG reference when the pipe to dieharder is closed.
+     * Clean Up the RNG reference when the pipe to dieharder is closed,
+     * or when the user sends ctrl+c to the program.
      * See rngs.py for more calling details.
      */
     signal(SIGPIPE, clean_up_rng);
+    signal(SIGINT,  clean_up_rng);
 
     uint32_t x = 0;
     while(true)
