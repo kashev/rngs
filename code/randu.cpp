@@ -19,8 +19,7 @@ namespace rng
     }
 
     fuint RandU::operator()() {
-        fuint temp = static_cast<fuint>((static_cast<uint64_t>(state) * multiplier) % modulator);
-        state = temp;
+        state = static_cast<fuint>((static_cast<uint64_t>(state) * multiplier) % modulator);
         return state;
     }
 }

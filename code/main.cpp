@@ -28,18 +28,15 @@ int main(int argc, char *argv[]) {
     switch(rng)
     {
         case 0: { // STL RNG using std::mt19937. For testing only.
-            StlRng randgen = StlRng();
-            randgen_ptr = &randgen;
+            randgen_ptr = new StlRng();
             break;
         }
         case 1: { // MT19937
-            MT19937 randgen = MT19937();
-            randgen_ptr = &randgen;
+            randgen_ptr = new MT19937();
             break;
         }
         case 2: { // RANDU
-            RandU randgen = RandU();
-            randgen_ptr = &randgen;
+            randgen_ptr = new RandU();
             break;
         }
         /*
@@ -58,8 +55,15 @@ int main(int argc, char *argv[]) {
     while(true)
     {
         x = static_cast<uint32_t>((*randgen_ptr)());
-        std::cout.write(reinterpret_cast<const char*>(&x), sizeof x);
+        cout.write(reinterpret_cast<const char*>(&x), sizeof x);
     }
+
+    /*
+     * This code is unreachable. It should be placed in a Kill Signal Handler.
+     * http://www.yolinux.com/TUTORIALS/C++Signals.html
+     */
+    delete randgen_ptr;
+    randgen_ptr = nullptr;
 
     return 0;
 }
