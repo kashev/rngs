@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include <signal.h>
 
 #include "stl_rng.h"
 #include "mt19937.h"
@@ -13,6 +14,18 @@
 
 using namespace std;
 using namespace rng;
+
+static RandomNumberGenerator* randgen_ptr = nullptr;
+
+/*
+ * Function for cleaning up allocated memory for the RNG.
+ */
+void clean_up_rng(int signum) {
+    delete randgen_ptr;
+    randgen_ptr = nullptr;
+
+    exit(signum);
+}
 
 int main(int argc, char *argv[]) {
 
@@ -22,8 +35,6 @@ int main(int argc, char *argv[]) {
     {
         rng = stoi(argv[1]);
     }
-
-    RandomNumberGenerator* randgen_ptr = nullptr;
 
     switch(rng)
     {
@@ -51,19 +62,18 @@ int main(int argc, char *argv[]) {
 
     randgen_ptr->seed(42);
 
+    /*
+     * Clean Up the RNG reference when the pipe to dieharder is closed.
+     * See rngs.py for more calling details.
+     */
+    signal(SIGPIPE, clean_up_rng);
+
     uint32_t x = 0;
     while(true)
     {
         x = static_cast<uint32_t>((*randgen_ptr)());
         cout.write(reinterpret_cast<const char*>(&x), sizeof x);
     }
-
-    /*
-     * This code is unreachable. It should be placed in a Kill Signal Handler.
-     * http://www.yolinux.com/TUTORIALS/C++Signals.html
-     */
-    delete randgen_ptr;
-    randgen_ptr = nullptr;
 
     return 0;
 }

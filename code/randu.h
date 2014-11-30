@@ -19,7 +19,7 @@ namespace rng
         fuint operator()();
     private:
         static constexpr uint64_t multiplier = 65539;
-        static constexpr uint64_t modulator = 0x80000000; // 2 ^ 31
+        static constexpr uint64_t modulator = 1 << 31;
 
         fuint state;
     };
