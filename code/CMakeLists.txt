@@ -10,6 +10,8 @@ set(SOURCE_FILES
     stl_rng.h
     stl_rng.cpp
     mt19937.h
-    mt19937.cpp)
+    mt19937.cpp
+    randu.h
+    randu.cpp)
 
 add_executable(rngs ${SOURCE_FILES})

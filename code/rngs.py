@@ -19,7 +19,8 @@ import subprocess
 class Generator(enum.Enum):
     stl = 0
     mt19937 = 1
-    # add more generator types here!
+    randu = 2
+    # add more generator types here! Remember to update main.cpp.
 
 
 def check_generator_type(value):

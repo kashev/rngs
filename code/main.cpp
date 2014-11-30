@@ -9,19 +9,21 @@
 
 #include "stl_rng.h"
 #include "mt19937.h"
+#include "randu.h"
 
 using namespace std;
 using namespace rng;
 
 int main(int argc, char *argv[]) {
-    int rng = 0;
+
+    unsigned int rng = 2;
 
     if (argc >= 2)
     {
         rng = stoi(argv[1]);
     }
 
-    RandomNumberGenerator* randgen_ptr = NULL;
+    RandomNumberGenerator* randgen_ptr = nullptr;
 
     switch(rng)
     {
@@ -30,13 +32,18 @@ int main(int argc, char *argv[]) {
             randgen_ptr = &randgen;
             break;
         }
-        case 1: {
+        case 1: { // MT19937
             MT19937 randgen = MT19937();
             randgen_ptr = &randgen;
             break;
         }
+        case 2: { // RANDU
+            RandU randgen = RandU();
+            randgen_ptr = &randgen;
+            break;
+        }
         /*
-         * Add more RNGs here!
+         * Add more RNG types here! Remember to update rngs.py.
          */
         default: {
             StlRng randgen = StlRng();
@@ -51,6 +58,7 @@ int main(int argc, char *argv[]) {
     while(true)
     {
         x = static_cast<uint32_t>((*randgen_ptr)());
+//        cout << x << endl;
         std::cout.write(reinterpret_cast<const char*>(&x), sizeof x);
     }
 
