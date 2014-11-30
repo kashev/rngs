@@ -5,24 +5,24 @@
  * David Huang   - huang157
  */
 
-#ifndef RANDU_H
-#define RANDU_H
+#ifndef MINSTD_H
+#define MINSTD_H
 
 #include "rng.h"
 
 namespace rng
 {
-    class RANDU : public RandomNumberGenerator {
+    class MINSTD : public RandomNumberGenerator {
     public:
-        RANDU();
+        MINSTD();
         void seed(fuint seed_num);
         fuint operator()();
     private:
-        static constexpr uint64_t g = 65539;
-        static constexpr uint64_t n = (1UL << 31UL); // 2^31
+        static constexpr uint64_t g = 48271;
+        static constexpr uint64_t n = (1UL << 31UL) - 1UL; // 2^32 - 1
 
         fuint state;
     };
 }
 
-#endif /* RANDU_H */
+#endif /* MINSTD_H */

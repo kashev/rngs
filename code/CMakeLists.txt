@@ -14,6 +14,8 @@ set(SOURCE_FILES
     mt19937.cpp
     randu.h
     randu.cpp
+    minstd.h
+    minstd.cpp
     r250.h
     r250.cpp)
 

@@ -20,7 +20,8 @@ class Generator(enum.Enum):
     stl = 0
     mt19937 = 1
     randu = 2
-    r250 = 3
+    minstd = 3
+    r250 = 4
     # Add more generator types here! Remember to update main.cpp.
 
 

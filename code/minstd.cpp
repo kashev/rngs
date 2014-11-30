@@ -5,20 +5,20 @@
  * David Huang   - huang157
  */
 
-#include "randu.h"
+#include "minstd.h"
 
 namespace rng
 {
-    RANDU::RANDU() :
-        RandomNumberGenerator(),
-        state(0U)
+    MINSTD::MINSTD() :
+            RandomNumberGenerator(),
+            state(0U)
     {}
 
-    void RANDU::seed(fuint seed_num) {
+    void MINSTD::seed(fuint seed_num) {
         state = seed_num;
     }
 
-    fuint RANDU::operator()() {
+    fuint MINSTD::operator()() {
         state = static_cast<fuint>((static_cast<uint64_t>(state) * g) % n);
         return state;
     }
