@@ -22,6 +22,7 @@ class Generator(enum.Enum):
     randu = 2
     minstd = 3
     r250 = 4
+    xorshift = 5
     # Add more generator types here! Remember to update main.cpp.
 
 

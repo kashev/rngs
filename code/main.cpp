@@ -13,6 +13,7 @@
 #include "randu.h"
 #include "minstd.h"
 #include "r250.h"
+#include "xorshift.h"
 
 using namespace std;
 using namespace rng;
@@ -59,12 +60,15 @@ int main(int argc, char *argv[]) {
             randgen_ptr = new R250();
             break;
         }
+        case 5: { // Xorshift
+            randgen_ptr = new Xorshift();
+            break;
+        }
         /*
          * Add more RNG types here! Remember to update rngs.py.
          */
         default: {
-            StlRng randgen = StlRng();
-            randgen_ptr = &randgen;
+            randgen_ptr = new StlRng();
             break;
         }
     }

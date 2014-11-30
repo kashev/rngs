@@ -26,3 +26,4 @@ Note that the only flag that's passed to `dieharder` by default is `-g 200`, to 
 - [RANDU](http://en.wikipedia.org/wiki/RANDU)
 - [MINSTD](http://en.wikipedia.org/wiki/Lehmer_random_number_generator#Parameters_in_common_use)
 - [R250](http://fossies.org/dox/gsl-1.16/r250_8c_source.html)
+- [Xorshift](http://en.wikipedia.org/wiki/Xorshift)

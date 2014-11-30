@@ -17,6 +17,8 @@ set(SOURCE_FILES
     minstd.h
     minstd.cpp
     r250.h
-    r250.cpp)
+    r250.cpp
+    xorshift.h
+    xorshift.cpp)
 
 add_executable(rngs ${SOURCE_FILES})
