@@ -58,7 +58,6 @@ int main(int argc, char *argv[]) {
     while(true)
     {
         x = static_cast<uint32_t>((*randgen_ptr)());
-//        cout << x << endl;
         std::cout.write(reinterpret_cast<const char*>(&x), sizeof x);
     }
 
