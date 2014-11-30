@@ -19,6 +19,7 @@ namespace rng
     class RandomNumberGenerator {
     public:
         RandomNumberGenerator(){};
+        virtual ~RandomNumberGenerator(){};
         virtual void seed(fuint seed_num) = 0;
         virtual fuint operator()() = 0;
     };
