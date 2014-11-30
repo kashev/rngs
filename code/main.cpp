@@ -11,6 +11,7 @@
 #include "stl_rng.h"
 #include "mt19937.h"
 #include "randu.h"
+#include "r250.h"
 
 using namespace std;
 using namespace rng;
@@ -48,6 +49,10 @@ int main(int argc, char *argv[]) {
         }
         case 2: { // RANDU
             randgen_ptr = new RandU();
+            break;
+        }
+        case 3: { // R250
+            randgen_ptr = new R250();
             break;
         }
         /*

@@ -24,3 +24,4 @@ Note that the only flag that's passed to `dieharder` by default is `-g 200`, to 
 ## Implemented RNGs
 - [Mersenne Twister](http://en.wikipedia.org/wiki/Mersenne_twister)
 - [RANDU](http://en.wikipedia.org/wiki/RANDU)
+- [R250](http://fossies.org/dox/gsl-1.16/r250_8c_source.html)

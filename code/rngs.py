@@ -20,7 +20,8 @@ class Generator(enum.Enum):
     stl = 0
     mt19937 = 1
     randu = 2
-    # add more generator types here! Remember to update main.cpp.
+    r250 = 3
+    # Add more generator types here! Remember to update main.cpp.
 
 
 def check_generator_type(value):
