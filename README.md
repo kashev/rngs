@@ -22,6 +22,8 @@ Example usage of Python calling script:
 
 Note that the only flag that's passed to `dieharder` by default is `-g 200`, to tell it to use `std_in_raw`. All other `dieharder` options, like the `-a` flag to run all tests, or the `-d` flag to run specific tests. For more information on `dieharder` options, run `man dieharder`.
 
+Also note that running a single RNG through all the `dieharder` tests take a little under an hour on my laptop. So running all of them will take a long time. User beware!
+
 ## Implemented RNGs
 - [Mersenne Twister](http://en.wikipedia.org/wiki/Mersenne_twister)
 - [RANDU](http://en.wikipedia.org/wiki/RANDU)
