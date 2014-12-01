@@ -1,5 +1,6 @@
 ## Project Specific gitignore
 code/bin
+code/results
 
 ## Standard c++ gitignore
 # Compiled Object files

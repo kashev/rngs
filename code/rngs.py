@@ -17,6 +17,7 @@ import subprocess
 
 @enum.unique
 class Generator(enum.Enum):
+    all = -1
     stl = 0
     mt19937 = 1
     randu = 2
@@ -62,16 +63,47 @@ def main():
 
     parser.add_argument("generator", type=check_generator_type,
                         help=helpstring)
+    parser.add_argument("--file", action='store_true',
+                        help="Output to file or not.")
 
     parser.add_argument('args', nargs=argparse.REMAINDER)
 
     args = parser.parse_args()
 
-    print("Using generator {}...".format(args.generator.name))
+    # Create Results Directory if it doesn't exist, if the file option is
+    # turned on
+    directory = "results"
+    if args.file and not os.path.exists(directory):
+        os.makedirs(directory)
 
-    subprocess.call("./bin/rngs {} | dieharder -g 200 {}"
-                    .format(args.generator.value, " ".join(args.args)),
-                    shell=True)
+    # Check for running all generators.
+    if args.generator == Generator.all:
+        print("Using all generators...")
+        for gen in Generator:
+            if gen != Generator.all:
+                if args.file:
+                    pipestring = " > results/{}.txt".format(gen.name)
+                else:
+                    pipestring = ""
+                print("Running generator {}...".format(gen.name))
+                subprocess.call("./bin/rngs {} | dieharder -g 200 {}{}"
+                                .format(gen.value,
+                                        " ".join(args.args),
+                                        pipestring),
+                                shell=True)
+
+    # Run a single generator.
+    else:
+        if args.file:
+            pipestring = " > results/{}.txt".format(args.generator.name)
+        else:
+            pipestring = ""
+        print("Using generator {}...".format(args.generator.name))
+        subprocess.call("./bin/rngs {} | dieharder -g 200 {}{}"
+                        .format(args.generator.value,
+                                " ".join(args.args),
+                                pipestring),
+                        shell=True)
 
 if __name__ == '__main__':
     main()
