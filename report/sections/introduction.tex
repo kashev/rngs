@@ -1,9 +1,15 @@
 The applications of randomness are far reaching. From statistics to simulation, there is a large need for random number generators to perform quickly, generate seemingly random numbers, yet be reproducible in case something needs to be random yet reproducible. Thus, the creation of pseudo random number generators, or PRNGs, has become a large research area in modeling and computer simulation. In the field of analysis of computing systems, simulation is an extremely important part of the modeling process. Today's stochastic models become so complex that solving these models analytically becomes impossible. Simulations driven by randomness are common, and motivate the study in this paper.
 
-\textbf{TODO:}
-\begin{itemize}
-    \item Emphasize that here, we mean psuedo random number generators for simulation.
-    \item Mention true hardware random number generators.
-    \item Mention Crypographic RNGs, and emphasize that this is not that.
-    \item Describe the plan for the paper.
-\end{itemize}
+\subsection{Kinds of Random Number Generators}
+For the purposes of this paper, there are two kinds of Random Number Generators, or RNGs: Hardware RNGs, and Software RNGs. Hardware RNGs are used not only to output a random bit stream faster than a multipurpose CPU might be able to \cite{Saiprasert:2010:OHA:1857927.1857929,Barel:1983:FHR:800042.801454}, but also in order to gather entropy in a more unpredictable way, such as measuring thermal noise, detecting air moisture, or using unpredictable user interactions, such as keystrokes and mouse motion , to name a few. Often hardware RNGs are used to seed software RNGs. Readers interested in the seeding of RNGs with external entropy are encouraged to read \cite{Hennebert:2013:EHP:2462096.2462122}.
+
+Software RNGs, unless they draw upon these sources of entropy from nature for seeds, are in fact PRNGs, because the software that generates these sequences must be deterministic. In this paper, the term RNG will refer to software PRNGs, unless otherwise indicated. These software RNGs use mathematical models to take a finite amount of state and turn this into a sequence of seemingly random output, suitable for use in a variety of purposes. Though special purpose hardware RNG circuits may be fast, software RNGs are usually faster than repeatedly polling a sensor to gain outside entropy. They are also far more convenient to use, as all is required is a computer, rather than special purpose hardware.
+
+Finally, there are several classes of software RNG based on quality of output. The highest class is those which are suited for cryptography. Generally, this includes passing the next bit test: that if $k$ bits of a random sequence are known, then no polynomial time complexity algorithm should be able to guess the next bit \cite{Yao_1982}. These cryptographically secure random number generators tend to be slow. They are not designed to be run more than a few times in cryptography, which makes them unsuitable for use in applications in which speed is necessary, like simulation.
+
+This paper deals with RNGs which are not of cryptographic quality, but are nonetheless useful. These RNGs combine speed with memory complexity and quality of output.
+
+\subsection{This Project}
+In this project, we study and implement a few common random number generators in C++, from those which have been used historically, to those which are most commonly in use today. We test our generators using the Dieharder test suite. Using Dieharder, we can push these RNGs to the point of failure, and therein see their flaws for various applications. We can also compare our results with the results of the RNGs built into the GNU Scientific Library, or GSL, and thus Dieharder. All of the software written for this project is available on Github \cite{github_repo}.
+
+First, we discuss the methods and challenges of testing random numbers in \ref{sec:testing}. Then, we discussed the different classes of RNGs we study in \ref{sec:classes}. Finally, we describe our software approach in \ref{sec:software} and share our results in \ref{sec:results}.

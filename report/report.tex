@@ -9,11 +9,11 @@
 \linespread{1.3}
 
 % For URLs
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 
 \begin{document}
 
-\title{Modern Random Number Generators: Implementation and Statistical Analysis}
+\title{Random Number Generators: Implementation and Statistical Analysis Using Dieharder}
 
 \author{\IEEEauthorblockN{Kashev Dalmia}
 \IEEEauthorblockA{Email: dalmia3@illinois.edu}
@@ -25,6 +25,9 @@
 \IEEEauthorblockA{Email: whs@illinois.edu}}
 
 \maketitle
+% Force Page Numbers
+\thispagestyle{plain}
+\pagestyle{plain}
 
 \begin{abstract}
 \input{sections/abstract.tex}
@@ -36,8 +39,6 @@ Random Number Generators, Psuedo Random Number Generators, PRNGs, Statistical An
 \section{Introduction}
 \label{sec:introduction}
 \input{sections/introduction.tex}
-
-This is where the rest of the paper will go. \cite{Matsumoto:1998:MTE:272991.272995}
 
 \section{Testing Random Number Generators}
 \label{sec:testing}
