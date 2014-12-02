@@ -14,6 +14,7 @@
 #include "minstd.h"
 #include "r250.h"
 #include "xorshift.h"
+#include "ranlux32.h"
 
 using namespace std;
 using namespace rng;
@@ -62,6 +63,10 @@ int main(int argc, char *argv[]) {
         }
         case 5: { // Xorshift
             randgen_ptr = new Xorshift();
+            break;
+        }
+        case 6: { // Subtract with Carry (RANLUX32)}
+            randgen_ptr = new RANLUX32();
             break;
         }
         /*

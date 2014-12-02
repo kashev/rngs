@@ -18,6 +18,8 @@ set(SOURCE_FILES
     minstd.cpp
     r250.h
     r250.cpp
+    ranlux32.h
+    ranlux32.cpp
     xorshift.h
     xorshift.cpp)
 
