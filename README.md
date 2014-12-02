@@ -33,4 +33,5 @@ Also note that running a single RNG through all the `dieharder` tests take a lit
 - [RANDU](http://en.wikipedia.org/wiki/RANDU)
 - [MINSTD](http://en.wikipedia.org/wiki/Lehmer_random_number_generator#Parameters_in_common_use)
 - [R250](http://fossies.org/dox/gsl-1.16/r250_8c_source.html)
+- [RANLUX](https://github.com/LuaDist/gsl/blob/master/rng/ranlux.c)
 - [Xorshift](http://en.wikipedia.org/wiki/Xorshift)
