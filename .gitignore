@@ -1,6 +1,11 @@
 ## Project Specific gitignore
 code/bin
 code/results
+# CMake Cruft
+code/CMakeCache.txt
+code/CMakeFiles/
+code/Makefile
+code/cmake_install.cmake
 
 ## Standard c++ gitignore
 # Compiled Object files
