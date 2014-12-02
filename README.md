@@ -14,6 +14,10 @@ This project uses the [Dieharder](https://www.phy.duke.edu/~rgb/General/dieharde
 
 This project requires `dieharder`. Obtain it from the link above, install it with your package manager, or on ubuntu, run `code/install_deps.sh`.
 
+To build the project without the use of an IDE, run:
+
+    cd code && cmake . && make
+
 Example usage of Python calling script:
 
     ./rngs.py stl -d 0
