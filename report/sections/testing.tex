@@ -1,1 +1,50 @@
-This section will describe the difficulties and challenges to testing random number generators, including the rationale behind p value analysis done in dieharder. We will heavily reference the Dieharder manual in this section. Describing how dieharder works is essential, and perhaps describing major important tests, especially the ones from diehard.
+\newcommand{\pvalue}{$p$-value}
+
+Testing random number generators can be tricky. An ideal random number generator can be considered to be independently, identically distributed samples of a uniform distribution $U(0,1)$. However, the RNGs that we consider here are not truly random. So, the crux of the problem is how to determine what set of numbers appear random enough, such that they are suitable for use.
+
+\subsection{The Empirical Approach}
+\label{sec:empirical}
+
+Imagine flipping a coin 10 times and recording the number of heads and tails. For a fair coin, one would expect to get roughly the same number of heads and tails. If one got 10 heads, and only 1 tails, one might be inclined to suspect that this coin might not be a fair and truly random coin. However, this event has a distinct nonzero probability of this happening, described by the pdf of the binomial distribution:
+$${10 \choose 9} \frac{1}{2}^{9} \frac{1}{2} = 0.00977$$
+In other words, even for a fair coin, in 1000 trials of 10 coin flips, one would expect to get 9 heads and 1 tails 9 or 10 times. Similarly, imagine if one had a different coin, and ran this same test, but always got exactly 5 heads and 5 tails, for all 1000 trials. Though on average we expect to get about the same number of heads and tails, this coin is also suspect, because for all these repeated trials, we should expect them to follow the binomial distribution discussed above.
+
+If we increased the number of flips per trial to a very large $n$, and increased the number of trials to a very large $t$, increasingly the distribution of what we expect to see is a normal distribution, with mean heads percentage of $\mu = 0.5$. This is verified by the Central Limit Theorem \cite{central_limit_theorem}.
+
+So taking again our mystery coin, if we apply the test with reasonably sized $n$ and $t$, and get a distribution of our sample means, we expect it to resemble a normal distribution, but reasonable $n$ and $t$ it will be close, but not perfect. There is a certain probability, if we assume that the underlying RNG is perfect, that the result we got would occur; a number on the range $(0,1)$. We shall call this our \pvalue. If this \pvalue~is very, very small (on the order of $10^{-6}$), we might say with a certain degree of confidence that our assumption that the RNG is good is incorrect. However, we could be more confident if we again repeated this process several times, and looked at the distribution of \pvalue s. Then, we could again find the \pvalue~ associated with getting this distribution, which we expect to be uniform on the range $U(0,1)$.
+
+We can find the probability of getting our \pvalue~distribution using a Kolmogorov-Smirnov test \cite{}, which quantifies the difference between the expected distribution and the \pvalue distribution we get. This test yields a second \pvalue: the probability that the resultant distribution would occur given that the underlying RNG is indeed indistinguishable from a perfect one.
+
+If this second \pvalue~is low, then we can safely decide that the RNG being tested is not good. If this value is high, then, rather than accept that the RNG is `good', instead we conclude that we cannot reject our hypothesis that it is `good'.
+
+In fact, this process is exactly what the Dieharder test suite does, and interested readers are encouraged to see \cite{dieharder_manual} for further information. Our implementations of RNGs are used to pipe random numbers to Dieharder, which does this sort of analysis for several different kinds of tests, which are discussed next in Section~\ref{sec:dieharder}
+
+\subsection{Dieharder}
+\label{sec:dieharder}
+
+Dieharder's man page states that ``[...]dieharder can eventually contain all rng tests that prove useful in one place[...]'' \cite{dieharder_website}. It aims to be a one stop-shop for testing RNGs. It is the spiritual successor and improvement to George Marsagalia's Diehard testing tool, which in turn is a testing tool which took many tests from the famous Donald Knuth \cite{diehard}. Though it is not the only set of tests or testing suite of this kind \cite{donald1999art,diehard,nisttoolkit,L'Ecuyer:2007:TCL:1268776.1268777}, it holds the distinction of being readily available in the Ubuntu package repository, and having good documentation \cite{dieharder_manual}.
+
+Dieharder has many tests, listed in Table~\ref{tab:diehard_tests}. It is worth discussing a few of the tests available in Dieharder to give the reader an idea of what sort of things are tested, and furthermore, what failing one of these tests might indicated about the quality of an RNG. Further information about tests not discussed is available in the Dieharder man pages and help flags.
+
+\input{sections/dieharder_tests.tex}
+
+\subsubsection{The STS Monobit Test}
+Taken from the NIST Statistical Test Suite \cite{nisttoolkit}, this test is exactly the test described above in Section~\ref{sec:empirical}. The number of ones are counted in a bit stream generated by a random number generator, and the same analysis is done on it. It is not an extremely rigorous test; some bad RNGs will still pass it, this test is good at weeding out extremely poor RNGs.
+
+\subsubsection{The Diehard Birthdays Test}
+Taken from Diehard, the Birthdays Test is so named for the Birthday Paradox: That in some set of $n$ randomly chosen people in a room, the probability that two of them share the same birthday becomes high astonishingly quickly, reaching $99.9\%$ at $n=70$ \cite{abramson1970more}. If these birthdays are placed in a year then the distance between pairs birthdays should follow a Poisson distribution. The test in Dieharder places 512 birthdays in a 24 bit `year' and determines if the the resultant distribution is in fact Poisson using the \pvalue~analysis described above.
+
+\subsubsection{RGB Lagged Sums}
+Written by the main Dieharder author Robert G. Brown, this test is the only test in the Dieharder suite which tests for lagged correlations. Imagine that overall, an RNG's output seemed very random, but every seven bits, the same pattern emerged throughout the generation. This test tests for that, with several different lag numbers, when running all tests. The lagged bits are taken, used to create single precision numbers between 0 and 1, then $t$ of these numbers are summed. A single trial should have a mean $\mu = 0.5 t$. Then, the \pvalue s are determined from several trials of $t$ sample sums. Interested readers are encouraged to see \cite{dieharder_manual} for a more discussion.
+
+\subsection{Interpreting Dieharder Results}
+The authors of Dieharder are careful to avoid saying that Dieharder can verify that a random number generator appears truly random. Rather, Dieharder serves as a set of tests which can weed out poor RNGs, and say with certainty that they do not appear truly random under scrutiny. This is not to say that they are not useful; for instance, if one is simply creating a website which provides a virtual die for a user to roll, then the RNG powering the die need not necessarily pass every Dieharder test (perhaps only the Diehard Craps Test, which specifically tests using an RNG to power dice for a game), but rather pass a majority of them, and still fulfill the requirements. However, if one is running Monte Carlo simulations, an RNG of a higher quality may be desired, which passes more tests.
+
+A system designer must take into account the trade offs between quality of RNG output, memory efficiency, speed, and complexity of implementation when choosing an RNG for a system. These days, with computer being as fast as they are, and many programming languages having already chosen a de facto RNG, this choice is hidden from most users, but is still relevant to those who work in large simulations, mathematicians, and those concerned with extremely high quality of randomness and speed.
+
+\subsection{The Theoretical Approach}
+\label{sec:theoretical}
+
+Apart from the empirical approach described above and used in Dieharder, there is also theoretical analysis that can be done with a priori knowledge of the RNG's implementation. For instance, the period of an RNG can be time consuming and memory inefficient to measure empirically, but with knowledge of the generating algorithm, can be deduced. Additionally some RNG algorithms (specifically the Linear Congruential Generator discussed in Section~\ref{sec:lcg}) have a property where their output falls in planes which can be determined easily, if one knows where to look.
+
+This sort of analysis exposes flaws of specific generator algorithms, but doesn't always provide an even footing on which to analyze the RNGs. The periods of the generators are discussed in each RNG class's section, along with other strengths and weaknesses, but the focus of our project is on the performance of these RNGs in Dieharder.
