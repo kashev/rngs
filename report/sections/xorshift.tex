@@ -2,13 +2,19 @@ A far more attractive choice than LCGs for those trying to implement RNGs with a
 
 Xorshift RNGs work by keeping a small amount of state (in many example implementations, four numbers), then repeatedly XORing these numbers with shifted versions of themselves. By doing this, the period of the generation can be $2^{32 * 4} = 2^{128}$ with very little code. The following is a short example for how easily Xorshift generators can be implemented. Let \texttt{t}, \texttt{x}, \texttt{y}, and \texttt{w} be seed values. Then, let \texttt{a}, \texttt{b}, and \texttt{c} be the parameters of the RNG. Then, the C style code is as simple as the following:
 
-\begin{lstlisting}[frame=single,language=C,basicstyle=\ttfamily]
+\begin{lstlisting}[frame=single,language=C++,basicstyle=\ttfamily]
+// Random seed numbers
+uint32_t t, x, y, w;
+// Fixed constants for shifting
+const uint32_t a, b, c;
+uint32_t get_rand(void){
     t = x ^ (x << a);
     x = y;
     y = z;
     z = w;
     w = w ^ (x >> b) ^ t ^ t( >> c);
     return w;
+}
 \end{lstlisting}
 
 Picking parameters for the directions and amounts to shift each state variable by is also relatively easy, and is discussed in \cite{marsaglia2003xorshift}, along with every set of appropriate parameters for 32 bit and 64 bit words.
