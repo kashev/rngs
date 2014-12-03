@@ -10,7 +10,9 @@ rngs
 
 A project for ECE 541 Project #2 @ UIUC. Investigating Random Number Generators.
 
-This project uses the [Dieharder](https://www.phy.duke.edu/~rgb/General/dieharder.php) project to test random number generators implemented in C++. More information can be found in the `proposal`, `report`, and `presentation` folders.
+
+This project uses the [Dieharder](https://www.phy.duke.edu/~rgb/General/dieharder.php) project to test random number generators implemented in C++. More information can be found in the `proposal`, `report`, and `presentation` folders. The final version of the paper in this repository which explains much of the theory behind this project can be found [here](https://github.com/kashev/rngs/raw/master/report/report.pdf).
+
 
 This project requires `dieharder`. Obtain it from the link above, install it with your package manager, or on ubuntu, run `code/install_deps.sh`.
 
