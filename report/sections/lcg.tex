@@ -40,6 +40,8 @@ LCGs have a fatal flaw, that is amplified by bad parameter choosing: their outpu
 
 Another issue is the period length; at most the period length is $m$, which cannot be easily increased without increasing the number of bits in the word being operated on, which is not practical on modern architectures. In fact, experts recommend not even considering generators with periods $<2^{50}$ for anything but the most trivial uses \cite{L'Ecuyer:1992:TRN:167293.167354}.
 
+Due to these problems, most LCGs pass some tests in Dieharder, but do not stand up to more intense scrutiny, like the lagged sums tests. RANDU's performance is patently awful, and stands up to its infamy. MINSTD fares better, but still does not pass as many tests as more sophisticated generators.
+
 \begin{figure}[tb]
     \begin{center}
         \includegraphics[width=\linewidth]{figures/randu.png}
