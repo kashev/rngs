@@ -1,1 +1,16 @@
-Describe the software approach, the implemented generators, etc.
+For this project, we use the Dieharder binary on Ubuntu in its raw input mode. This allows us to use a shell pipe to send raw random numbers from an arbitrary generator into Dieharder for analysis.
+
+There are two major components included in our code: C++ source to build an RNG binary, and a small Python script to call the RNG binary and pipe it into Dieharder appropriately. We chose C++ because these tests can take a long time if the generator is slow, and C++ is a good compromise between its ability to allow for modular code and its speed.
+
+The specific RNG algorithms implemented are as follows:
+\begin{itemize}
+    \item Mersenne Twister
+    \item RANDU
+    \item MINSTD
+    \item R250
+    \item RANLUX
+    \item Xorshift
+\end{itemize}
+Each RNG algorithm inherits from a common base class, which allows for the RNG binary to choose the RNG in use via a command line argument. Random 32 bit numbers are written to \texttt{stdout} in raw binary, which is in turned piped to Dieharder for analysis. Finally, the output of Dieharder can be optionally piped to file.
+
+All code is available on Github \cite{github_repo}.
