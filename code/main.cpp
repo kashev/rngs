@@ -15,6 +15,7 @@
 #include "r250.h"
 #include "xorshift.h"
 #include "ranlux32.h"
+#include "cmwc.h"
 
 using namespace std;
 using namespace rng;
@@ -61,12 +62,16 @@ int main(int argc, char *argv[]) {
             randgen_ptr = new R250();
             break;
         }
-        case 5: { // Xorshift
+        case 5: { // Subtract with Carry (RANLUX)
+            randgen_ptr = new RANLUX32();
+            break;
+        }
+        case 6: { // Xorshift
             randgen_ptr = new Xorshift();
             break;
         }
-        case 6: { // Subtract with Carry (RANLUX32)}
-            randgen_ptr = new RANLUX32();
+        case 7: {// Complimentary Multiply with Carry
+            randgen_ptr = new CMWC();
             break;
         }
         /*

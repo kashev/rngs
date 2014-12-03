@@ -21,6 +21,8 @@ set(SOURCE_FILES
     ranlux32.h
     ranlux32.cpp
     xorshift.h
-    xorshift.cpp)
+    xorshift.cpp
+    cmwc.h
+    cmwc.cpp)
 
 add_executable(rngs ${SOURCE_FILES})
