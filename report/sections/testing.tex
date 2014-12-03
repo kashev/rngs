@@ -6,7 +6,7 @@ Testing random number generators can be tricky. An ideal random number generator
 \label{sec:empirical}
 
 Imagine flipping a coin 10 times and recording the number of heads and tails. For a fair coin, one would expect to get roughly the same number of heads and tails. If one got 10 heads, and only 1 tails, one might be inclined to suspect that this coin might not be a fair and truly random coin. However, this event has a distinct nonzero probability of this happening, described by the pdf of the binomial distribution:
-$${10 \choose 9} \frac{1}{2}^{9} \frac{1}{2} = 0.00977$$
+$$ \binom{10}{9} \frac{1}{2}^{9} \frac{1}{2} = 0.00977$$
 In other words, even for a fair coin, in 1000 trials of 10 coin flips, one would expect to get 9 heads and 1 tails 9 or 10 times. Similarly, imagine if one had a different coin, and ran this same test, but always got exactly 5 heads and 5 tails, for all 1000 trials. Though on average we expect to get about the same number of heads and tails, this coin is also suspect, because for all these repeated trials, we should expect them to follow the binomial distribution discussed above.
 
 If we increased the number of flips per trial to a very large $n$, and increased the number of trials to a very large $t$, increasingly the distribution of what we expect to see is a normal distribution, with mean heads percentage of $\mu = 0.5$. This is verified by the Central Limit Theorem \cite{central_limit_theorem}.
