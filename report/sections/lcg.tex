@@ -11,7 +11,7 @@ Where the parameters are chosen with the following restraints:
 \end{align*}
 If $c = 0$, this particular class of of RNG is called a Lehmer, or Park-Miller RNG \cite{Payne:1969:CLP:362848.362860,Park:1988:RNG:63039.63042}.
 
-The period of such generators depends heavily on the chosen parameters. It can be at most $m$, and as a result, $m$ is often chosen to be the largest number which can fit in the number of bits of the output; usually $2^{32}$ or $2^{64}$. Some common parameter sets in use include MINSTD, and glibc. A set of parameters notoriously deemed unfit for use is called RANDU, and is discussed below. Values for these parameters can be found in
+The period of such generators depends heavily on the chosen parameters. It can be at most $m$, and as a result, $m$ is often chosen to be the largest number which can fit in the number of bits of the output; usually $2^{32}$ or $2^{64}$. Some common parameter sets in use include MINSTD, and glibc. A set of parameters notoriously deemed unfit for use is called RANDU, and is discussed below. Values for these parameters can be found in Table~\ref{tab:lcg_params}.
 
 \begin{table}[tb]
     \caption{Table of common LCG parameters.}

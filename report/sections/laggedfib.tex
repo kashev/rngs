@@ -1,11 +1,23 @@
+Lagged Fibonacci Generators, or LFGs, owe their name to the general form of the recurrence relation that defines them, which is reminiscent of the Fibonacci recurrence relation:
+\begin{equation} \label{eq:lfg}
+    X_{n} \equiv \left(X_{n-r} \star X_{n-s}\right) \mod m, \qquad 0 < r < s
+\end{equation}
+Here, $\star$ can be any operation, usually addition, subtraction, or logical XOR, and $m$ is a modulus which ensures the output is in a proper range. Usually, $m=2^{32} - 1$, to give maximum period and avoid correlation issues that can arise when $m=2^32$. The generator stores the past $s$ items of state, then uses the recurrence relation above in Equation~\ref{eq:lfg} to generate the next output. The two lag constants $r$ and $s$ are specially chosen to avoid correlations.
+
+For example, in a popular implementation called R250, $\star$ is defined as XOR, $r=147$, and $s=250$ \cite{kirkpatrick1981very}. Another popular implementation is RANLUX, which adds a few wrinkles to a simpler recurrence style generator, called Subtract with Carry \cite{marsaglia1991new,marsaglia2003random}:
+\begin{equation} \label{eqn:swc}
+    X_{n} \equiv \left(X_{n-r} - X_{n-s} - c_{n-1}\right) \mod m, \qquad 0 < r < s
+\end{equation}
+Here, $r$ and $s$ are the usual lag constants, and $c$ is defined as:
+\begin{align*}
+    c_n &= 1 \qquad \text{ if } X_{n-r} - X_{n-s} - c_{n-1} \geq 0, \\
+    c_n &= 0 \qquad \text{ otherwise.}
+\end{align*}
+RANLUX takes this generator and adds skipping element parameter $p$, designed to remove unwanted correlations at the expense of speed. After 24 random numbers are generated, $p-24$ random numbers are thrown away \cite{luscher1994portable,james1994ranlux}. The default C++11 parameters for the RANLUX 24 bit engine are $r = 10$, $s = 24$, $p=24$, which results in no numbers being thrown away, increasing speed, but reducing effectiveness.
+
 \subsubsection{Strengths}
+Lagged Fibonacci generators can store a wide range of amount of state, but their flexibility results in many generators of this type being created and seeing common use. The operations are relatively fast, and have larger periods when a few different twist like the subtract with carry has been applied \cite{marsaglia2003random}.
+
 \subsubsection{Weaknesses}
+LFGs have a wrinkle in understanding their simplicity; they are difficult to seed properly, and require special initialization to make sure that there are no linear correlations in the initial seed data, lest the entire generator become extremely predictable \cite{Matsumoto:2007:CDI:1276927.1276928}. They are in general, slower and require more state than Xorshift generators, and do not have periods as large as Xorshift or Multiply with Carry Generators, discussed next.
 
-This section will describe Lagged Fib Generators.
-\url{http://en.wikipedia.org/wiki/Lagged_Fibonacci_generator}
-Also Mention Subtract with Carry:
-\url{http://en.wikipedia.org/wiki/Subtract_with_carry}
-
-Paper for special initialization to avoid linear dependence \cite{Matsumoto:2007:CDI:1276927.1276928}.
-RANLUX paper \cite{luscher1994portable}.
-R250 paper \cite{kirkpatrick1981very}
