@@ -20,8 +20,7 @@ namespace rng
         void seed(fuint seed_num);
         fuint operator()();
     private:
-        static constexpr fuint a = 0;
-        static constexpr fuint b = (1UL << 31UL) - 1UL; // 2^32 - 1
+        static constexpr fuint a = 18705ULL;
         static constexpr size_t r = 4096;
 
         std::array<fuint, r> state;

@@ -39,7 +39,7 @@ namespace rng
         uint64_t t;
 
         i = (i + 1) & 4095;
-        t = (18705ULL * state[i]) + c;
+        t = (a * state[i]) + c;
         c = t >> 32;
         state[i] = 0xfffffffe - t;
 
