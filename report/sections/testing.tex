@@ -42,6 +42,10 @@ The authors of Dieharder are careful to avoid saying that Dieharder can verify t
 
 A system designer must take into account the trade offs between quality of RNG output, memory efficiency, speed, and complexity of implementation when choosing an RNG for a system. These days, with computer being as fast as they are, and many programming languages having already chosen a de facto RNG, this choice is hidden from most users, but is still relevant to those who work in large simulations, mathematicians, and those concerned with extremely high quality of randomness and speed.
 
+What does failing a Dieharder test look like? We look back to the \pvalue~analysis; This final \pvalue~represents the probability that, given that the underlying PRNG resembles a true RNG, the series of our tests would yeild the results that they did. The final \pvalue~is a probability on the range $(0,1)$. If this probability is extremely low or extremely high, then the result is considered to be a test failure.
+
+In Dieharder specifically, if the \pvalue~$p$ is $p > \%99.95$ or $p < \%0.05$, then the test is regarded as failed, which is an extremely high threshold. If $p > \%99.5$ or $p < \%0.5$, then the test is marked as weak performance on the part of the RNG. In either the case of the failure or weakness result, it may be worth re-running the test using a different seed to see if this result is consistent. After all, there is some degree of randomness involved, and finding an area of zero ambiguity is nigh impossible.
+
 \subsection{The Theoretical Approach}
 \label{sec:theoretical}
 

@@ -1,14 +1,14 @@
 Lagged Fibonacci Generators, or LFGs, owe their name to the general form of the recurrence relation that defines them, which is reminiscent of the Fibonacci recurrence relation:
 \begin{equation} \label{eq:lfg}
-    X_{n} \equiv \left(X_{n-r} \star X_{n-s}\right) \mod m, \qquad 0 < r < s
+    X_{n} \equiv \left(X_{n-r} \star X_{n-s}\right) \mod m,\quad 0 < r < s
 \end{equation}
 Here, $\star$ can be any operation, usually addition, subtraction, or logical XOR, and $m$ is a modulus which ensures the output is in a proper range. Usually, $m=2^{32} - 1$, to give maximum period and avoid correlation issues that can arise when $m=2^32$. The generator stores the past $s$ items of state, then uses the recurrence relation above in Equation~\ref{eq:lfg} to generate the next output. The two lag constants $r$ and $s$ are specially chosen to avoid correlations.
 
 For example, in a popular implementation called R250, $\star$ is defined as XOR, $r=147$, and $s=250$ \cite{kirkpatrick1981very}. Another popular implementation is RANLUX, which adds a few wrinkles to a simpler recurrence style generator, called Subtract with Carry \cite{marsaglia1991new,marsaglia2003random}:
 \begin{equation} \label{eqn:swc}
-    X_{n} \equiv \left(X_{n-r} - X_{n-s} - c_{n-1}\right) \mod m, \qquad 0 < r < s
+    X_{n} \equiv \left(X_{n-r} - X_{n-s} - c_{n-1}\right) \mod m
 \end{equation}
-Here, $r$ and $s$ are the usual lag constants, and $c$ is defined as:
+Here, $r$ and $s$ are the usual lag constants where $0 < r < s$, and $c$ is defined as:
 \begin{align*}
     c_n &= 1 \qquad \text{ if } X_{n-r} - X_{n-s} - c_{n-1} \geq 0, \\
     c_n &= 0 \qquad \text{ otherwise.}
