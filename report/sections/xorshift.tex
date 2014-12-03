@@ -1,6 +1,22 @@
+A far more attractive choice than LCGs for those trying to implement RNGs with a lot of memory constraints, speed requirements, or a combination of the two on an embedded platform, is the Xorshift generator. Discovered and described by George Marsaglia \cite{marsaglia2003xorshift}, they are significantly more adept at creating sufficiently long periods for more applications.
+
+Xorshift RNGs work by keeping a small amount of state (in many example implementations, four numbers), then repeatedly XORing these numbers with shifted versions of themselves. By doing this, the period of the generation can be $2^{32 * 4} = 2^{128}$ with very little code. The following is a short example for how easily Xorshift generators can be implemented. Let \texttt{t}, \texttt{x}, \texttt{y}, and \texttt{w} be seed values. Then, let \texttt{a}, \texttt{b}, and \texttt{c} be the parameters of the RNG. Then, the C style code is as simple as the following:
+
+\begin{lstlisting}[frame=single,language=C,basicstyle=\ttfamily]
+    t = x ^ (x << a);
+    x = y;
+    y = z;
+    z = w;
+    w = w ^ (x >> b) ^ t ^ t( >> c);
+    return w;
+\end{lstlisting}
+
+Picking parameters for the directions and amounts to shift each state variable by is also relatively easy, and is discussed in \cite{marsaglia2003xorshift}, along with every set of appropriate parameters for 32 bit and 64 bit words.
+
 \subsubsection{Strengths}
+
+Xorshift RNGs are very fast on modern architectures, and use very little state. They have longer periods than LCGs, and are easier to choose parameters for.
+
 \subsubsection{Weaknesses}
 
-This section will describe Xorshift generators.
-
-\url{http://en.wikipedia.org/wiki/Xorshift}
+However, the periods of Xorshift generators are not as large as some other generators. They are suitable for most uses, but in large simulations and Monte Carlo analysis, which both use massive amounts of random numbers, the relatively small period could affect results.
