@@ -33,7 +33,6 @@ namespace rng
         static constexpr size_t sh1 = 10;
         static constexpr size_t sh8 = 8;
         static constexpr fuint mask = 0x7fffffff;
-        static constexpr float mul = 1.0/4294967296.0;
 
         void next_state() {
             fuint x, y;
