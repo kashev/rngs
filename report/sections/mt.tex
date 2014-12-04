@@ -5,10 +5,11 @@ Mathematically, the MT operation for determining the next number in the sequence
     X_{k+n} = X_{k+m} \oplus \left(X_k^u | X_{k+1}^ll\right)A
 \end{equation}
 Where $w$ is width of each word, $X_k^u$ is the upper $w-r$ bits of the $k$th word, $X_{k+1}^ll$ is the lower $r$ bits of the $k+1$th word, and $A$ is matrix of the form:
-\[ \left( \begin{array}{ccc}
-0 & I_{w-1} \\
-a_{w-1} & {a_w ... a_0} \end{array} \right)\]
-Colloquially, this is a matrix where the bottom row is a vector $a$ and the upper rows are comprised of a single identity matrix shifted to the right by one column. In effect, left multiplying by this matrix yields a vector whose bits are masked by $a$ and right shifted once. Again, this is similar to the operation of a simple LFSR except that the inputs to the XOR are masked before being processed.
+\begin{equation} \label{eq:mtA}
+A =  \mat{2}{\substack{0 \\ \vdots \\ 0} & I_{w-1}\\
+           a_{w-1} & a_{w-2} \cdots a_0}
+\end{equation}
+Colloquially, this is a matrix where the bottom row is a vector $a$, the left most column is zeros (save for the bottom row), and the rest is a single identity matrix. In effect, left multiplying by this matrix yields a vector whose bits are masked by $a$ and right shifted once. Again, this is similar to the operation of a simple LFSR except that the inputs to the XOR are masked before being processed.
 
 Finally, to generate the desired random numbers, the sequence built from the above equations are transformed once more as such:
 \begin{equation} \label{eq:mt_t1}

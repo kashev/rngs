@@ -16,6 +16,19 @@
 % For URLs
 \usepackage[hidelinks]{hyperref}
 
+% Matrix Commands
+\newcommand {\mat} [2] {
+    \left[
+            {
+            \begin {array} {*{#1}c}
+                    #2
+            \end {array}
+            }
+    \right]
+}
+% Extra Fraction Command
+\newcommand{\stack}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
+
 \begin{document}
 
 \title{Random Number Generators: Implementation and Statistical Analysis Using Dieharder}
