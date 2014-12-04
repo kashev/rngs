@@ -24,13 +24,13 @@ namespace rng
          * Initialize seed vector using MINSTD
          */
         static constexpr uint64_t g = 48271;
-        static constexpr uint64_t n = (1UL << 31UL) - 1UL; // 2^32 -1
+        static constexpr uint64_t n = (1UL << 32UL) - 1UL; // 2^32 -1
         fuint first, second = seed_num;
         for(size_t i = 1; i < state.size(); ++i)
         {
             first = static_cast<fuint>((static_cast<uint64_t>(second) * g) % n);
             second = static_cast<fuint>((static_cast<uint64_t>(first) * g) % n);
-            state[i] = ((static_cast<uint64_t>(first)) << 32UL) << second;
+            state[i] = ((static_cast<uint64_t>(first)) << 32UL) + second;
         }
     }
 
