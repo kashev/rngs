@@ -1,6 +1,34 @@
-This section will describe the Mersenne Twister class of generators.
+One of the most commonly used RNGs, the Mersenne Twister (MT), was originally discovered by [?]. It is essentially an extension on top of the classical linear feedback shift register (LFSR). A simple LFSR is comprised of a bitwise shift-register where its input is determined by some combination of its current contents, traditionally the XOR of a select few bits from the register. While the LFSR is itself a RNG, its linear nature makes it very easily predictable. The Mersenne Twister improves upon the base concept by obfuscating the internal state of the register before feeding it into the XOR operation as well as applying additional transformations on the output to make the resulting sequence more uniform.
+
+Mathematically, the MT operation for determining the next number in the sequence is:
+\begin{equation} \label{eq:mt}
+    X_{k+n} = X_{k+m} \oplus (X_k^u | X_{k+1}^ll)A
+\end{equation}
+Where $w$ is width of each word, $X_k^u$ is the upper $w-r$ bits of the $k$th word, $X_{k+1}^ll$ is the lower $r$ bits of the $k+1$th word, and $A$ is matrix of the form:
+\[ \left( \begin{array}{ccc}
+0 & I_{w-1} \\
+a_{w-1} & {a_w ... a_0} \end{array} \right)\]
+Colloquially, this is a matrix where the bottom row is a vector $a$ and the upper rows are comprised of a single identity matrix shifted to the right by one column. In effect, left multiplying by this matrix yields a vector whose bits are masked by $a$ and right shifted once. Again, this is similar to the operation of a simple LFSR except that the inputs to the XOR are masked before being processed.
+
+Finally, to generate the desired random numbers, the sequence built from the above equations are transformed once more as such:
+\begin{equation} \label{eq:mt_t1}
+    y := x \oplus (x >> u)
+\end{equation}
+\begin{equation} \label{eq:mt_t2}
+    y := y \oplus ((y << s) \cdot b)
+\end{equation}
+\begin{equation} \label{eq:mt_t3}
+    y := y \oplus ((y << t) \cdot c)
+\end{equation}
+\begin{equation} \label{eq:mt_t4}
+    y := y \oplus (y >> l)
+\end{equation}
+This is done so that each possible word occurs the same number of times within one period, with the exception of the all-zero word, which is less represented due to the underlying LFSR backbone.
+
+The vast amount of parameters needed to define an instance of the MT algorithm along with the option of additional flexibility means that there exist many variants of this generator. For example, the 32-bit generator used in C++11 (MT19937) uses the following parameters: $w$=32, $n$=624, $m$=397, $a$=0x9908B0DF, $b$=0x9D2C5680, $c$=0xEFC60000, $u$=11, $s$=7, $t$=15, $l$=18.
 
 \subsubsection{Strengths}
-\subsubsection{Weaknesses}
+Mercenne Twister generators were originally designed to address concerns regarding the quality of randomness provided by prior generators. It is unsurprising then that these generators generally perform very well in the Dieharder tests. They are also well-known for their incredibly long periods ($2^{19937}-1$).
 
-\url{http://en.wikipedia.org/wiki/Mersenne_twister}
+\subsubsection{Weaknesses}
+The complex design of this generator unfortunately leads to slower performance, although it is certainly not the slowest of the bunch. Also, much like Lagged Fibonacci generators, MT generators store a great deal of state must be properly initialized when seeded. This is especially true for MT generators since its implementations typically require much more state storage than its Lagged Fibonacci counterparts. It's also worth mentioning that despite its high quality outputs, the base MT algorithm does not pass the next bit test and is not suited for strict cryptographic applications.
