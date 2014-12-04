@@ -12,7 +12,7 @@ uint32_t get_rand(void){
     x = y;
     y = z;
     z = w;
-    w = w ^ (x >> b) ^ t ^ t( >> c);
+    w = w ^ (x >> b) ^ t ^ (t >> c);
     return w;
 }
 \end{lstlisting}
