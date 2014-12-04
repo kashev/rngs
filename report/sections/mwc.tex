@@ -13,8 +13,14 @@ The value of $c_n$ is simply the `carry' or overflow from the previous operation
 
 The combination of variable lag and nonconstant addends allow MWC generators to have much longer periods than their LCG counterparts as well as greater randomness. Intuitively, this is due to the storage of additional data about the prior sequence. In LCG generators, the amount of overflow from each operation is simply discarded via the modulo operation. Here, that overflow is stored and used as part of the internal state.
 
+The period of such a generator is heavily dependent on the selection of the lag $r$ and the modulus $m$ [?]. Computing the period is difficult but is made easier by selecting parameters such that $p=am^r-1$ is prime. There may be many lags $r$ that satisfy this for a given $a$ and $m$ but this set may be narrowed if $p$ is a safe prime, that is, if both $p$ and $(p-1)/2$ are prime. If this is not the case, factoring $p-1$ must be factored to determine the optimal lag. Unfortunately, factoring is a difficult problem so, in practice, the Complementary Multiply With Carry variant is most often used. This generator is described by the form:
+\begin{equation} \label{eq:cmwc}
+    X_{n+1} = (m-1) - (aX_{n-r} + c_n) \mod m
+\end{equation}
+This alternative form has period related instead to $p=am^r+1$, which makes $p-1 = am^r$ far easier to factor. This eases the process of finding parameter sets that yield the greatest period.
+
 \subsubsection{Strengths}
-Built on the very lightweight LCG generator, MWC generators share the desirable property of being very fast, as it is computed using a small number of basic arithmetic operations. Unlike its predecessor, MWC generators can have very long periods, making them far more useful in most applications compared to LCG types.
+Built on the very lightweight LCG generator, MWC generators share the desirable property of being very fast, as it is computed using a small number of basic arithmetic operations. Unlike its predecessor, MWC generators can have very long periods, making them quite useful in most applications.
 
 \subsubsection{Weaknesses}
 Just like other generators utilizing lag, MWC generators require additional memory to store its state compared to LCG generators, making it slightly less desirable when used in memory-constrained applications. Also like other lagged generators, seeding a MWC generator may require some finesse not needed in seeding the LCG generator.
