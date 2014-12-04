@@ -85,7 +85,8 @@ def main():
     if args.generator == Generator.all:
         print("Using all generators...")
         for gen in Generator:
-            if gen != Generator.all:
+            if gen not in [Generator.all, Generator.ranlux]:
+                # RANLUX is too slow to run under normal circumstances.
                 if args.file:
                     pipestring = " > {}/{}.txt".format(args.directory, gen.name)
                 else:

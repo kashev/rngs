@@ -83,8 +83,8 @@ int main(int argc, char *argv[]) {
          * Add more RNG types here! Remember to update rngs.py.
          */
         default: {
-            randgen_ptr = new StlRng();
-            break;
+            cerr << rng << " is not a supported RNG value." << endl;
+            exit(1);
         }
     }
 
