@@ -9,6 +9,7 @@
 \usepackage{graphicx}        % Images
 \usepackage{listings}        % Code Snippets
 
+
 % 1.3 for 1.5 Line Spacing, 1.6 for Double Line Spacing
 \linespread{1.3}
 
@@ -60,6 +61,32 @@ Random Number Generators, Psuedo Random Number Generators, PRNGs, Statistical An
 \section{Conclusion}
 \label{sec:conclusion}
 \input{sections/conclusion.tex}
+
+\section*{Acknowledgment}
+The authors would like to thank Professor William H. Sanders for his guidance and the course staff for the University of Illinois course ECE/CS 541: Computer Systems Analysis.
+
+% http://tex.stackexchange.com/a/126856/56432
+\newpage
+\onecolumn
+
+\appendices
+
+% http://tex.stackexchange.com/a/85778/56432
+\renewcommand\thefigure{\thesection.\arabic{figure}}
+\setcounter{figure}{0}
+
+\section{Results From Dieharder}
+\label{app:results}
+\input{sections/appendix_results.tex}
+
+\newpage
+
+\section{Selected Source Files}
+\label{app:source}
+\input{sections/appendix_sources.tex}
+
+\newpage
+\twocolumn
 
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv,sections/bibliography}

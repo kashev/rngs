@@ -1,0 +1,35 @@
+This section includes some source files from the code base. Interested readers are encouraged to view the Github Repository for all code \cite{github_repo}.
+
+The first file included is \texttt{rng.h} in Section~\ref{sec:rng_h}. This header file defines the interfaces for all the implemented RNGs. The next included sources are \texttt{xorshift.h} and \texttt{xorshift.cpp}, in Sections~\ref{sec:xorshift_h} and~\ref{sec:xorshift_cpp}, respectively. This should give the reader a feel for what the internals of the generators look like. Finally, the Python calling script, \texttt{rngs.py} in Section~\ref{sec:rngs_py}, which demonstrates hooking up the produced RNG binary to Dieharder, is included as well.
+
+\subsection{rng.h}
+\label{sec:rng_h}
+The source for \texttt{rng.h}, the basic skeleton of all implemented generators.
+\lstinputlisting[language=C++,
+                 basicstyle=\ttfamily\footnotesize]
+    {../code/rng.h}
+
+\newpage
+\subsection{xorshift.h}
+\label{sec:xorshift_h}
+The source for \texttt{xorshift.h}, an example generator implementation.
+\lstinputlisting[language=C++,
+                 basicstyle=\ttfamily\footnotesize]
+    {../code/xorshift.h}
+
+\newpage
+\subsection{xorshift.cpp}
+\label{sec:xorshift_cpp}
+The source for \texttt{xorshift.cpp}, an example generator implementation.
+\lstinputlisting[language=C++,
+                 basicstyle=\ttfamily\footnotesize]
+    {../code/xorshift.cpp}
+
+\newpage
+\subsection{rngs.py}
+\label{sec:rngs_py}
+The source for \texttt{rngs.py}, the main code for the RNG binary.
+\lstinputlisting[language=Python,
+                 basicstyle=\ttfamily\footnotesize]
+    {../code/rngs.py}
+
