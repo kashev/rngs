@@ -5,7 +5,6 @@
  * David Huang   - huang157
  */
 
-#include <iostream>
 #include "ranlux32.h"
 
 namespace rng
