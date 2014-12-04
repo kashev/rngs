@@ -21,8 +21,8 @@ Picking parameters for the directions and amounts to shift each state variable b
 
 \subsubsection{Strengths}
 
-Xorshift RNGs are very fast on modern architectures, and use very little state. They have longer periods than LCGs, and are easier to choose parameters for. These RNGs also do far better on the Dieharder tests than LCGs, and pass the majority of them rather convincingly.
+Xorshift RNGs are very fast on modern architectures, and use very little state. They have longer periods than LCGs, and are easier to choose parameters for. These RNGs also perform far better on the Dieharder tests than LCGs, and pass the majority of them rather convincingly.
 
 \subsubsection{Weaknesses}
 
-However, the periods of Xorshift generators are not as large as some other generators. They are suitable for most uses, but in large simulations and Monte Carlo analysis, which both use massive amounts of random numbers, the relatively small period could affect results.
+However, the periods of Xorshift generators are not as large as some other generators. They are suitable for most uses, but in large simulations and Monte Carlo analysis, where massive amounts of random numbers are needed, the relatively small period could affect results.

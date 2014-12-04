@@ -1,4 +1,4 @@
-The Linear Congruential class of RNGs, or LCG for short, is a very old and relatively simple random number generator. They are based on the formula for a line, modulo another number. The following recurrence relation defines the LCG.
+The Linear Congruential class of RNGs, or LCG for short, is a very old and relatively simple random number generator. They are based on the algebraic formula of a line, modulo another number. The following recurrence relation defines the LCG.
 \begin{equation} \label{eq:lcg}
     X_{n+1} = (aX_n + c) \mod m
 \end{equation}
@@ -32,11 +32,11 @@ The period of such generators depends heavily on the chosen parameters. It can b
 \end{table}
 
 \subsubsection{Strengths}
-LCG generators are tiny. They store a single word of state, are easy to seed, and with proper parameter choosing can be quite effective RNGs. However, some of the flaws greatly outweigh the lightweight and speed benefits of LCGs for all but the most basic of platforms, discussed next.
+LCG generators are tiny. They store a single word of state, are easy to seed, and with proper parameter selection, can be quite effective RNGs. However, some of the flaws greatly outweigh the lightweight nature and speed benefits of LCGs for all but the most basic of platforms, discussed next.
 
 \subsubsection{Weaknesses}
 
-LCGs have a fatal flaw, that is amplified by bad parameter choosing: their outputs fall in easily identifiable planes, as proved by Marsaglia \cite{randomnumbersinplanes}. This is most easily demonstrated by viewing the output of a notoriously bad set of parameters: RANDU. In Figure~\ref{fig:randu_fig}, the output of RANDU is treated as $(x,y,z)$ pairs as it is generated, then these points are plotted. It is obvious that all of the output falls in the same set of planes, and is not even an approximation of a truly random number generator. Better parameter choices alleviate this phenomenon by adding the number of planes that would come up in a test like this, and making them closer together, but the basic problem is unavoidable.
+LCGs have a fatal flaw that is amplified by bad parameter selection: their outputs fall in easily identifiable planes, as proved by Marsaglia \cite{randomnumbersinplanes}. This is most easily demonstrated by viewing the output of a notoriously bad set of parameters: RANDU. In Figure~\ref{fig:randu_fig}, the output of RANDU is treated as $(x,y,z)$ pairs as it is generated, then these points are plotted. It is obvious that all of the output falls in the same set of planes, and is not even an approximation of a truly random number generator. Better parameter choices alleviate this phenomenon by adding the number of planes that would come up in a test like this, and making them closer together, but the basic problem is unavoidable.
 
 Another issue is the period length; at most the period length is $m$, which cannot be easily increased without increasing the number of bits in the word being operated on, which is not practical on modern architectures. In fact, experts recommend not even considering generators with periods $<2^{50}$ for anything but the most trivial uses \cite{L'Ecuyer:1992:TRN:167293.167354}.
 
