@@ -38,3 +38,4 @@ Also note that running a single RNG through all the `dieharder` tests take a lit
 - [RANLUX](https://github.com/LuaDist/gsl/blob/master/rng/ranlux.c)
 - [Xorshift](http://en.wikipedia.org/wiki/Xorshift)
 - [CMWC](http://en.wikipedia.org/wiki/Multiply-with-carry#Implementation)
+- [TinyMT](http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/TINYMT/index.html)
