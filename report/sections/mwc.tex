@@ -14,7 +14,7 @@ The value of $c_n$ is simply the `carry' or overflow from the previous operation
 The combination of variable lag and nonconstant addends allow MWC generators to have much longer periods than their LCG counterparts as well as greater randomness. Intuitively, this is due to the storage of additional data about the prior sequence. In LCG generators, the amount of overflow from each operation is simply discarded via the modulo operation. Here, that overflow is stored and used as part of the internal state.
 
 \subsubsection{Strengths}
-Built on the very lightweight LCG generator, MWC generators share the desirable property of being very fast, as it is computed using a small number of basic arithmetic operations. The addition of the carried term greatly increases the period of this type of generator, up to nearly $m^2$ in some cases.
+Built on the very lightweight LCG generator, MWC generators share the desirable property of being very fast, as it is computed using a small number of basic arithmetic operations. Unlike its predecessor, MWC generators can have very long periods, making them far more useful in most applications compared to LCG types.
 
 \subsubsection{Weaknesses}
 Just like other generators utilizing lag, MWC generators require additional memory to store its state compared to LCG generators, making it slightly less desirable when used in memory-constrained applications. Also like other lagged generators, seeding a MWC generator may require some finesse not needed in seeding the LCG generator.
