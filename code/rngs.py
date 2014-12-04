@@ -65,6 +65,9 @@ def main():
 
     parser.add_argument("generator", type=check_generator_type,
                         help=helpstring)
+    parser.add_argument("--directory", type=str,
+                        help="Directory to output files to",
+                        action='store', default="results")
     parser.add_argument("--file", action='store_true',
                         help="Output to file or not.")
 
@@ -74,9 +77,8 @@ def main():
 
     # Create Results Directory if it doesn't exist, if the file option is
     # turned on
-    directory = "results"
-    if args.file and not os.path.exists(directory):
-        os.makedirs(directory)
+    if args.file and not os.path.exists(args.directory):
+        os.makedirs(args.directory)
 
     # Check for running all generators.
     if args.generator == Generator.all:
@@ -84,7 +86,7 @@ def main():
         for gen in Generator:
             if gen != Generator.all:
                 if args.file:
-                    pipestring = " > results/{}.txt".format(gen.name)
+                    pipestring = " > {}/{}.txt".format(args.directory, gen.name)
                 else:
                     pipestring = ""
                 print("Running generator {}...".format(gen.name))
@@ -97,7 +99,8 @@ def main():
     # Run a single generator.
     else:
         if args.file:
-            pipestring = " > results/{}.txt".format(args.generator.name)
+            pipestring = " > {}/{}.txt".format(args.directory,
+                                               args.generator.name)
         else:
             pipestring = ""
         print("Using generator {}...".format(args.generator.name))
