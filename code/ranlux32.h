@@ -28,9 +28,24 @@ namespace rng
             return ((a % b )+ b) % b;
         }
 
+        uint64_t next_state() {
+            if(state[mod(index-s, r)] < state[index])
+                prev = 1;
+            else
+                prev = 0;
+            uint64_t output = state[mod(index-s, r)] - state[index] - prev;
+            state[index] = output;
+            index = (index + 1) % r;
+            return output;
+        }
+
         static constexpr fuint r = 37;
         static constexpr fuint s = 24;
-        std::array<fuint, r> state;
+        static constexpr fuint discard = 11;
+        static constexpr fuint block_size = 389;
+        size_t prev;
+        fuint count;
+        std::array<uint64_t, r> state;
         size_t index;
     };
 }

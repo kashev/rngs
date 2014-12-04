@@ -5,12 +5,15 @@
  * David Huang   - huang157
  */
 
+#include <iostream>
 #include "ranlux32.h"
 
 namespace rng
 {
     RANLUX32::RANLUX32() :
         RandomNumberGenerator(),
+        prev(0),
+        count(0),
         state(),
         index(0)
     {}
@@ -30,9 +33,14 @@ namespace rng
     }
 
     fuint RANLUX32::operator()() {
-        fuint output = state[mod(index-s, r)] - state[index];
-        state[index] = output;
-        index = (index + 1) % r;
-        return output;
+        if(count == discard) {
+            count = 0;
+            for(uint i = 0; i < block_size-discard; ++i) {
+                next_state();
+            }
+        }
+        uint64_t output = next_state();
+        count++;
+        return (fuint)output;
     }
 }
