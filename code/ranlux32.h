@@ -39,8 +39,8 @@ namespace rng
             return output;
         }
 
-        static constexpr fuint r = 37;
-        static constexpr fuint s = 24;
+        static constexpr fuint r = 12;
+        static constexpr fuint s = 5;
         static constexpr fuint discard = 11;
         static constexpr fuint block_size = 389;
         size_t prev;
