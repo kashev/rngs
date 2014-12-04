@@ -19,7 +19,7 @@ namespace rng
         fuint operator()();
     private:
         static constexpr uint64_t g = 48271;
-        static constexpr uint64_t n = (1UL << 31UL) - 1UL; // 2^32 - 1
+        static constexpr uint64_t n = (1UL << 32UL) - 1UL; // 2^32 - 1
 
         fuint state;
     };
