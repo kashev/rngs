@@ -26,6 +26,7 @@ class Generator(enum.Enum):
     ranlux = 5
     xorshift = 6
     cmwc = 7
+    tinymt = 8
     # Add more generator types here! Remember to update main.cpp.
 
 

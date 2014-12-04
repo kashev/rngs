@@ -23,6 +23,8 @@ set(SOURCE_FILES
     xorshift.h
     xorshift.cpp
     cmwc.h
-    cmwc.cpp)
+    cmwc.cpp
+    tinymt.h
+    tinymt.cpp)
 
 add_executable(rngs ${SOURCE_FILES})
