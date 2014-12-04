@@ -24,7 +24,7 @@ namespace rng
          * A modulo function that works with negative numbers.
          * http://stackoverflow.com/a/12277233/1473320
          */
-        fuint mod(fuint a, fuint b){
+        fuint mod(fuint a, fuint b) {
             return ((a % b )+ b) % b;
         }
 
