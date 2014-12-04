@@ -83,7 +83,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    randgen_ptr->seed(42);
+    randgen_ptr->seed(0xDEADBEEF);
 
     /*
      * Clean Up the RNG reference when the pipe to dieharder is closed,
