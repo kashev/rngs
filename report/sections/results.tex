@@ -10,7 +10,7 @@ Overall, the RNGs that we implemented performed as expected. All RNGs (with the 
 
 \input{tables/passesweaksfails_table.tex}
 
-Another metric worth measuring is RNG speed. This metric has been alluded, but is formally measured in random numbers per second. Luckily, Dieharder generates this metric already. As expected, the STL implementation of the Mersenne Twister is quite fast (as is much of the STL), and the RANLUX implementation is slow (because it must discard so many numbers to keep the quality of output high). Of the other RNGs, our Mersenne Twister is the most complicated, and as a result it is the slowest. RANDU is simple and fast, and the other algorithms hover around the same speed. The data is presented graphically in Figure~\ref{fig:speed} and tabularly in Table~\ref{tab:speed}.
+Another metric worth measuring is RNG speed. This metric has been alluded, but is formally measured in random numbers per second. Luckily, Dieharder generates this metric already. As expected, the STL implementation of the Mersenne Twister is quite fast (as is much of the STL), and the RANLUX implementation is slow (because it must discard so many numbers to keep the quality of output high). Of the other RNGs, our Mersenne Twister is the most complicated, and as a result it is the slowest. RANDU is simple and fast, and the other algorithms hover around the same speed. The data is presented graphically in Figure~\ref{fig:speed} and tabularly in Table~\ref{tab:speed}. These speeds were measured on a laptop with an Intel Core i7-4600U CPU @ 2.10GHz with 4 cores.
 
 It is important to remember that these speeds must be considered to be relative. These RNGs must be piped through the shell, as opposed to the GNU Scientific Library RNGs built into the Dieharder binary, and as a result, they can be passed to Dieharder faster.
 
@@ -23,3 +23,7 @@ It is important to remember that these speeds must be considered to be relative.
 \end{figure}
 
 \input{tables/speed_table.tex}
+
+Finally, a measure that cannot be easily determined empirically, and instead falls under analytical testing, is that of period length. As described in Section~\ref{sec:classes}, as the complexity of the generator goes up, the period also goes up. The Mersenne Twister has a particularly large period several orders of magnitude larger than more simple ones, expect for the particular CMWC generator chosen. Though this generator stores far more state than the standard Mersenne Twister implementation, it is significantly faster and has a period several orders of magnitude greater than the other generators. Period lengths for implemented RNGS are displayed tabularly in Table~\ref{tab:period}.
+
+\input{tables/period_table.tex}
