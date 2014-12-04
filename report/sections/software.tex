@@ -4,13 +4,13 @@ There are two major components included in our code: C++ source to build an RNG 
 
 The specific RNG algorithms implemented are as follows:
 \begin{itemize}
-    \item Mersenne Twister
     \item RANDU
     \item MINSTD
     \item R250
     \item RANLUX
     \item Xorshift
     \item CMWC
+    \item Mersenne Twister
     \item TinyMT
 \end{itemize}
 Each RNG algorithm inherits from a common base class, which allows for the RNG binary to choose the RNG in use via a command line argument. Random 32 bit numbers are written to \texttt{stdout} in raw binary, which is in turned piped to Dieharder for analysis. Finally, the output of Dieharder can be optionally piped to file.

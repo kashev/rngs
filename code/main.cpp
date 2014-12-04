@@ -71,11 +71,11 @@ int main(int argc, char *argv[]) {
             randgen_ptr = new Xorshift();
             break;
         }
-        case 7: {// Complimentary Multiply with Carry
+        case 7: { // Complimentary Multiply with Carry
             randgen_ptr = new CMWC();
             break;
         }
-        case 8: {// TinyMT
+        case 8: { // TinyMT
             randgen_ptr = new TinyMT();
             break;
         }

@@ -10,9 +10,9 @@ Overall, the RNGs that we implemented performed as expected. All RNGs (with the 
 
 \input{tables/passesweaksfails_table.tex}
 
-Another metric worth measuring is RNG speed. This metric has been alluded, but is formally measured in random numbers per second. Luckily, Dieharder generates this metric already. As expected, the STL implementation of the Mersenne Twister is quite fast (as is much of the STL), and the RANLUX implementation is slow (because it must discard so many numbers to keep the quality of output high). Of the other RNGs, our Mersenne Twister is the most complicated, and as a result it is the slowest. RANDU is simple and fast, and the other algorithms hover around the same speed. The data is presented graphically in Figure~\ref{fig:speed} and tabularly in Table~\ref{tab:speed}
+Another metric worth measuring is RNG speed. This metric has been alluded, but is formally measured in random numbers per second. Luckily, Dieharder generates this metric already. As expected, the STL implementation of the Mersenne Twister is quite fast (as is much of the STL), and the RANLUX implementation is slow (because it must discard so many numbers to keep the quality of output high). Of the other RNGs, our Mersenne Twister is the most complicated, and as a result it is the slowest. RANDU is simple and fast, and the other algorithms hover around the same speed. The data is presented graphically in Figure~\ref{fig:speed} and tabularly in Table~\ref{tab:speed}.
 
-It is important to remember that these speeds must be considered to be relative. These RNGs must be piped through the shell, as opposed to the GNU Scientific Library RNGs built into the Dieharder binary, and as a result, they can be faster.
+It is important to remember that these speeds must be considered to be relative. These RNGs must be piped through the shell, as opposed to the GNU Scientific Library RNGs built into the Dieharder binary, and as a result, they can be passed to Dieharder faster.
 
 \begin{figure}[tb]
     \begin{center}

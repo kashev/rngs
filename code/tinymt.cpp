@@ -22,10 +22,12 @@ namespace rng
         state[1] = mat1;
         state[2] = mat2;
         state[3] = tmat;
-        for(uint i = 1; i < 8; ++i) {
+        for(fuint i = 1; i < 8; ++i)
+        {
             state[i&3] ^= i + 1812433253 * (state[(i-1)&3] ^ state[(i-1)&3] >> 30);
         }
-        for(uint i = 0; i < 8; ++i) {
+        for(fuint i = 0; i < 8; ++i)
+        {
             next_state();
         }
     }
