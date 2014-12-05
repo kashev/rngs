@@ -17,6 +17,7 @@ namespace rng
         RANDU();
         void seed(fuint seed_num);
         fuint operator()();
+
     private:
         static constexpr uint64_t g = 65539;
         static constexpr uint64_t n = (1UL << 31UL); // 2^31

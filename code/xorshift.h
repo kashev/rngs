@@ -17,6 +17,7 @@ namespace rng
         Xorshift();
         void seed(fuint seed_num);
         fuint operator()();
+
     private:
         fuint x, y, z, w;
     };

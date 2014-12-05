@@ -5,8 +5,8 @@
  * David Huang   - huang157
  */
 
-#ifndef RANLUX32_H
-#define RANLUX32_H
+#ifndef RANLUX_H
+#define RANLUX_H
 
 #include "rng.h"
 
@@ -14,22 +14,15 @@
 
 namespace rng
 {
-    class RANLUX32 : public RandomNumberGenerator {
+    class RANLUX : public RandomNumberGenerator {
     public:
-        RANLUX32();
+        RANLUX();
         void seed(fuint seed_num);
         fuint operator()();
-    private:
-        /*
-         * A modulo function that works with negative numbers.
-         * http://stackoverflow.com/a/12277233/1473320
-         */
-        fuint mod(fuint a, fuint b) {
-            return ((a % b )+ b) % b;
-        }
 
+    private:
         uint64_t next_state() {
-            if(state[mod(index-s, r)] < state[index])
+            if(state[mod(index - s, r)] < state[index])
             {
                 prev = 1;
             }
@@ -38,7 +31,7 @@ namespace rng
                 prev = 0;
             }
 
-            uint64_t output = state[mod(index-s, r)] - state[index] - prev;
+            uint64_t output = state[mod(index - s, r)] - state[index] - prev;
             state[index] = output;
             index = (index + 1) % r;
             return output;
@@ -48,6 +41,7 @@ namespace rng
         static constexpr fuint s = 5;
         static constexpr fuint discard = 11;
         static constexpr fuint block_size = 389;
+
         size_t prev;
         fuint count;
         std::array<uint64_t, r> state;
@@ -55,4 +49,4 @@ namespace rng
     };
 }
 
-#endif /* RANLUX32_H */
+#endif /* RANLUX_H */

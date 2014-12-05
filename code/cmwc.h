@@ -19,6 +19,7 @@ namespace rng
         CMWC();
         void seed(fuint seed_num);
         fuint operator()();
+
     private:
         static constexpr fuint a = 18705ULL;
         static constexpr size_t r = 4096;

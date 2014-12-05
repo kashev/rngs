@@ -25,15 +25,12 @@ namespace rng
         /*
          * Algorithmic Constants
          */
-        static constexpr size_t w = 32;
         static constexpr size_t n = 624;
         static constexpr size_t m = 397;
-        static constexpr size_t r = 31;
         static constexpr fuint rmask = 0x80000000; // bit 31
         static constexpr fuint rprime = 0x7fffffff; // bits 0-30
         static constexpr fuint a = 0x9908b0df;
         static constexpr size_t u = 11;
-        static constexpr fuint d = 0xffffffff;
         static constexpr size_t s = 7;
         static constexpr fuint b = 0x9d2c5680;
         static constexpr size_t t = 15;

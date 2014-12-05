@@ -19,15 +19,8 @@ namespace rng
         TinyMT();
         void seed(fuint seed_num);
         fuint operator()();
-    private:
-        /*
-         * A modulo function that works with negative numbers.
-         * http://stackoverflow.com/a/12277233/1473320
-         */
-        fuint mod(fuint a, fuint b) {
-            return ((a % b )+ b) % b;
-        }
 
+    private:
         static constexpr size_t mexp = 127;
         static constexpr size_t sh0 = 1;
         static constexpr size_t sh1 = 10;

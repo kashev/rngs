@@ -20,15 +20,8 @@ namespace rng
         void seed(fuint seed_num);
         fuint operator()();
     private:
-        /*
-         * A modulo function that works with negative numbers.
-         * http://stackoverflow.com/a/12277233/1473320
-         */
-        fuint mod(fuint a, fuint b) {
-            return ((a % b )+ b) % b;
-        }
-
         static constexpr fuint state_size = 250;
+
         std::array<fuint, state_size> state;
         size_t index;
     };

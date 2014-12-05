@@ -14,7 +14,7 @@
 #include "minstd.h"
 #include "r250.h"
 #include "xorshift.h"
-#include "ranlux32.h"
+#include "ranlux.h"
 #include "cmwc.h"
 #include "tinymt.h"
 
@@ -63,8 +63,8 @@ int main(int argc, char *argv[]) {
             randgen_ptr = new R250();
             break;
         }
-        case 5: { // Subtract with Carry (RANLUX)
-            randgen_ptr = new RANLUX32();
+        case 5: { // Subtract with Carry with Discard (RANLUX)
+            randgen_ptr = new RANLUX();
             break;
         }
         case 6: { // Xorshift

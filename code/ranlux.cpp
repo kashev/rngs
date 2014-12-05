@@ -5,11 +5,11 @@
  * David Huang   - huang157
  */
 
-#include "ranlux32.h"
+#include "ranlux.h"
 
 namespace rng
 {
-    RANLUX32::RANLUX32() :
+    RANLUX::RANLUX() :
         RandomNumberGenerator(),
         prev(0),
         count(0),
@@ -17,7 +17,7 @@ namespace rng
         index(0)
     {}
 
-    void RANLUX32::seed(fuint seed_num) {
+    void RANLUX::seed(fuint seed_num) {
         state[0] = seed_num;
 
         /*
@@ -31,11 +31,11 @@ namespace rng
         {
             first = static_cast<fuint>((static_cast<uint64_t>(second) * g) % n);
             second = static_cast<fuint>((static_cast<uint64_t>(first) * g) % n);
-            state[i] = ((static_cast<uint64_t>(first)) << 32) | second;
+            state[i] = ((static_cast<uint64_t>(first)) << 32) | static_cast<uint64_t>(second);
         }
     }
 
-    fuint RANLUX32::operator()() {
+    fuint RANLUX::operator()() {
         if(count == discard)
         {
             count = 0;

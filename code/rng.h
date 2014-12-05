@@ -22,6 +22,15 @@ namespace rng
         virtual ~RandomNumberGenerator(){};
         virtual void seed(fuint seed_num) = 0;
         virtual fuint operator()() = 0;
+
+    protected:
+        /*
+         * A modulo function that works with negative numbers.
+         * http://stackoverflow.com/a/12277233/1473320
+         */
+        fuint mod(fuint a, fuint b) {
+            return ((a % b )+ b) % b;
+        }
     };
 }
 
