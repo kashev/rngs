@@ -3,6 +3,7 @@ For this project, we use the Dieharder binary on Ubuntu in its raw input mode. T
 There are two major components included in our code: C++ source to build an RNG binary, and a small Python script to call the RNG binary and pipe it into Dieharder appropriately. We chose C++ because these tests can take a long time if the generator is slow, and C++ is a good compromise between its ability to allow for modular code and its speed.
 
 The specific RNG algorithms implemented are as follows:
+\begin{multicols}{2}
 \begin{itemize}
     \item RANDU
     \item MINSTD
@@ -13,6 +14,7 @@ The specific RNG algorithms implemented are as follows:
     \item Mersenne Twister
     \item TinyMT
 \end{itemize}
+\end{multicols}
 Each RNG algorithm inherits from a common base class, which allows for the RNG binary to choose the RNG in use via a command line argument. Random 32 bit numbers are written to \texttt{stdout} in raw binary, which is in turned piped to Dieharder for analysis. Finally, the output of Dieharder can be optionally piped to file. These options are readily exposed using a small Python script.
 
 All code for this project is available on Github \cite{github_repo}, with some selected source files in Appendix~\ref{app:source}. The project was tested using Ubuntu 14.04, gcc version 4.9.1, and Python version 3.4.2. Note that Dieharder is required to run examples, and can be installed via your package manager if available, or built from source \cite{dieharder_website}.
