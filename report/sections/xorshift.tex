@@ -1,7 +1,8 @@
 A far more attractive choice than LCGs for those trying to implement RNGs with a lot of memory constraints, speed requirements, or a combination of the two on an embedded platform, is the Xorshift generator. Discovered and described by George Marsaglia \cite{marsaglia2003xorshift}, they are significantly more adept at creating sufficiently long periods for more applications.
 
-Xorshift RNGs work by keeping a small amount of state (in many example implementations, four numbers), then repeatedly XORing these numbers with shifted versions of themselves. By doing this, the period of the generation can be $2^{32 * 4} = 2^{128}$ with very little code. The following is a short example for how easily Xorshift generators can be implemented. Let \texttt{t}, \texttt{x}, \texttt{y}, and \texttt{w} be seed values. Then, let \texttt{a}, \texttt{b}, and \texttt{c} be the parameters of the RNG. Then, the C style code is as simple as the following:
+Xorshift RNGs work by keeping a small amount of state (in many example implementations, four numbers), then repeatedly XORing these numbers with shifted versions of themselves. By doing this, the period of the generation can be $2^{32 * 4} = 2^{128}$ with very little code. The following is a short example for how easily Xorshift generators can be implemented. Let \texttt{t}, \texttt{x}, \texttt{y}, and \texttt{w} be seed values. Then, let \texttt{a}, \texttt{b}, and \texttt{c} be the parameters of the RNG. Then, the C style code is as simple as the code in Figure~\ref{fig:xorshift_code}.
 
+\begin{figure}[tb]
 \begin{lstlisting}[frame=single,language=C++,basicstyle=\ttfamily]
 // Random seed numbers
 uint32_t t, x, y, w;
@@ -16,12 +17,15 @@ uint32_t get_rand(void){
     return w;
 }
 \end{lstlisting}
+    \caption{Simple C style code for an Xorshift generator.}
+    \label{fig:xorshift_code}
+\end{figure}
 
 Picking parameters for the directions and amounts to shift each state variable by is also relatively easy, and is discussed in \cite{marsaglia2003xorshift}, along with every set of appropriate parameters $a$, $b$, and $c$ for 32 bit and 64 bit words.
 
 \subsubsection{Strengths}
 
-Xorshift RNGs are very fast on modern architectures, and use very little state. They have longer periods than LCGs, and are easier to choose parameters for. These RNGs also perform somewhat better on the Dieharder tests than LCGs.
+Xorshift RNGs are very fast on modern architectures, and use very little state. They have longer periods than LCGs, and are easier to choose parameters for. These RNGs also perform somewhat better on the Dieharder tests than LCGs, though are not without their issues.
 
 \subsubsection{Weaknesses}
 
